@@ -39,6 +39,9 @@ public class Panelist {
 	@OneToMany(mappedBy = "panelist")
 	private Set<AskPanelistMapper> mapper;
 
+	public Panelist() {
+	}
+	
 	public Panelist(int panelistId, String panelistName, String email, String grade, String contactDetail,
 			String account, String baseLocation, Set<AskPanelistMapper> mapper) {
 		super();

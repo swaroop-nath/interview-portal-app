@@ -31,7 +31,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		httpSecurity.authorizeRequests()//
 				.antMatchers("/auth-api/authenticate").permitAll() // Allowing anyone to access the login page
 				.antMatchers("/auth-api/sign-up").permitAll()// Allowing anyone to access the sign up page.
-				.antMatchers("/recipe-api/fetch-all").permitAll() // Allowing anyone to access the Fetch All Recipe end-point
 				// Disallow everything else..
 				.anyRequest().permitAll();
 

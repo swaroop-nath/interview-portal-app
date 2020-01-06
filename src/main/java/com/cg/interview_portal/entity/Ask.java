@@ -1,5 +1,6 @@
 package com.cg.interview_portal.entity;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.Set;
 
@@ -33,9 +34,8 @@ public class Ask {
 	@Column(length = 2, nullable = false)
 	private int slotsL2;
 	
-	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern = "dd/MM/YYYY", timezone = "IST")
 	@Column(nullable = false)
-	private Date interviewDate;
+	private LocalDate interviewDate;
 	
 	@Column(length = 50, nullable = false)
 	private String numGradePersonnel;
@@ -43,7 +43,10 @@ public class Ask {
 	@OneToMany(mappedBy = "ask")
 	private Set<AskPanelistMapper> mapper;
 
-	public Ask(int askId, Skill skill, int slotsL1, int slotsL2, Date interviewDate, String numGradePersonnel,
+	public Ask() {
+	}
+
+	public Ask(int askId, Skill skill, int slotsL1, int slotsL2, LocalDate interviewDate, String numGradePersonnel,
 			Set<AskPanelistMapper> mapper) {
 		super();
 		this.askId = askId;
@@ -87,11 +90,11 @@ public class Ask {
 		this.slotsL2 = slotsL2;
 	}
 
-	public Date getInterviewDate() {
+	public LocalDate getInterviewDate() {
 		return interviewDate;
 	}
 
-	public void setInterviewDate(Date interviewDate) {
+	public void setInterviewDate(LocalDate interviewDate) {
 		this.interviewDate = interviewDate;
 	}
 

@@ -1,7 +1,9 @@
 package com.cg.interview_portal.entity;
 
+import java.time.LocalTime;
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -18,12 +20,12 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 public class AskPanelistMapper {
 
 	@Id
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "ask_id", referencedColumnName = "ask_id")
 	private Ask ask;
 	
 	@Id
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "panelist_id", referencedColumnName = "panelist_id")
 	private Panelist panelist;
 	
@@ -37,13 +39,11 @@ public class AskPanelistMapper {
 	@Column(length = 2, nullable = false)
 	private String level;
 	
-	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern = "HH:mm", timezone = "IST")
 	@Column(nullable = false)
-	private Date slotStartTiming;
+	private LocalTime slotStartTiming;
 	
-	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern = "HH:mm", timezone = "IST")
 	@Column(nullable = false)
-	private Date slotEndTiming;
+	private LocalTime slotEndTiming;
 	
 	@Column(length = 2, nullable = false)
 	private int numSlots;
@@ -51,8 +51,11 @@ public class AskPanelistMapper {
 	@Column(length = 256)
 	private String comment;
 
+	public AskPanelistMapper() {
+	}
+	
 	public AskPanelistMapper(Ask ask, Panelist panelist, String interviewLocation, Mode mode, String level,
-			Date slotStartTiming, Date slotEndTiming, int numSlots, String comment) {
+			LocalTime slotStartTiming, LocalTime slotEndTiming, int numSlots, String comment) {
 		super();
 		this.ask = ask;
 		this.panelist = panelist;
@@ -105,19 +108,19 @@ public class AskPanelistMapper {
 		this.level = level;
 	}
 
-	public Date getSlotStartTiming() {
+	public LocalTime getSlotStartTiming() {
 		return slotStartTiming;
 	}
 
-	public void setSlotStartTiming(Date slotStartTiming) {
+	public void setSlotStartTiming(LocalTime slotStartTiming) {
 		this.slotStartTiming = slotStartTiming;
 	}
 
-	public Date getSlotEndTiming() {
+	public LocalTime getSlotEndTiming() {
 		return slotEndTiming;
 	}
 
-	public void setSlotEndTiming(Date slotEndTiming) {
+	public void setSlotEndTiming(LocalTime slotEndTiming) {
 		this.slotEndTiming = slotEndTiming;
 	}
 

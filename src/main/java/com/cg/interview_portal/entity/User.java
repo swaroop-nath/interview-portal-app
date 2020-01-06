@@ -1,16 +1,19 @@
 package com.cg.interview_portal.entity;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 @Entity
 @SequenceGenerator(name = "user_seq", sequenceName = "user_sequence")
@@ -27,14 +30,16 @@ public class User {
 	@Column(length = 256, nullable = false)
 	private String password;
 	
-	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern = "dd/MM/YYYY", timezone = "IST")
 	@Column(nullable = false)
-	private Date dateOfBirth;
+	private LocalDate dateOfBirth;
 	
-	@ElementCollection
+	@ElementCollection(fetch = FetchType.EAGER)
 	private List<Role> roles;
 
-	public User(int userId, String emailId, String password, Date dateOfBirth, List<Role> roles) {
+	public User() {
+	}
+	
+	public User(int userId, String emailId, String password, LocalDate dateOfBirth, List<Role> roles) {
 		super();
 		this.userId = userId;
 		this.emailId = emailId;
@@ -67,11 +72,11 @@ public class User {
 		this.password = password;
 	}
 
-	public Date getDateOfBirth() {
+	public LocalDate getDateOfBirth() {
 		return dateOfBirth;
 	}
 
-	public void setDateOfBirth(Date dateOfBirth) {
+	public void setDateOfBirth(LocalDate dateOfBirth) {
 		this.dateOfBirth = dateOfBirth;
 	}
 

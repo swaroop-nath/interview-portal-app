@@ -19,6 +19,9 @@ public class Skill {
 	@Column(length = 20, nullable = false)
 	private String skillName;
 
+	public Skill() {
+	}
+	
 	public Skill(int skillId, String skillName) {
 		super();
 		this.skillId = skillId;
