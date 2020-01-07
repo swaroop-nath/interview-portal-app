@@ -15,6 +15,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @SequenceGenerator(name = "ask_seq", sequenceName = "ask_sequence", allocationSize = 1)
@@ -40,6 +41,7 @@ public class Ask {
 	@Column(length = 50, nullable = false)
 	private String numGradePersonnel;
 	
+	@JsonManagedReference
 	@OneToMany(mappedBy = "ask")
 	private Set<AskPanelistMapper> mapper;
 

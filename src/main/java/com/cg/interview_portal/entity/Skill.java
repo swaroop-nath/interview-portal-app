@@ -8,7 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 
 @Entity
-@SequenceGenerator(name = "skill_seq", sequenceName = "skill_sequence")
+@SequenceGenerator(name = "skill_seq", sequenceName = "skill_sequence", allocationSize = 1)
 public class Skill {
 
 	@Id

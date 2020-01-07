@@ -20,7 +20,7 @@ public class RecruitmentServiceImpl implements RecruitmentService {
 	
 	@Override
 	public boolean raiseAnAsk(Ask raisedAsk) {
-		Ask mergedAsk = ENTITY_MANAGER.merge(raisedAsk);
+		ENTITY_MANAGER.merge(raisedAsk);
 		repository.flush();
 		return true;
 	}

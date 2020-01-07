@@ -1,13 +1,20 @@
 package com.cg.interview_portal.entity;
 
+import java.util.List;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @SequenceGenerator(name = "panel_seq", sequenceName = "panelist_sequence")
@@ -35,7 +42,11 @@ public class Panelist {
 	
 	@Column(length = 30, nullable = false)
 	private String baseLocation;
+	
+	@OneToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+	private List<Skill> skills;
 
+	@JsonBackReference
 	@OneToMany(mappedBy = "panelist")
 	private Set<AskPanelistMapper> mapper;
 
@@ -43,7 +54,7 @@ public class Panelist {
 	}
 	
 	public Panelist(int panelistId, String panelistName, String email, String grade, String contactDetail,
-			String account, String baseLocation, Set<AskPanelistMapper> mapper) {
+			String account, String baseLocation, List<Skill> skills, Set<AskPanelistMapper> mapper) {
 		super();
 		this.panelistId = panelistId;
 		this.panelistName = panelistName;
@@ -52,6 +63,7 @@ public class Panelist {
 		this.contactDetail = contactDetail;
 		this.account = account;
 		this.baseLocation = baseLocation;
+		this.skills = skills;
 		this.mapper = mapper;
 	}
 
@@ -109,6 +121,14 @@ public class Panelist {
 
 	public void setBaseLocation(String baseLocation) {
 		this.baseLocation = baseLocation;
+	}
+
+	public List<Skill> getSkills() {
+		return skills;
+	}
+
+	public void setSkills(List<Skill> skills) {
+		this.skills = skills;
 	}
 
 	public Set<AskPanelistMapper> getMapper() {

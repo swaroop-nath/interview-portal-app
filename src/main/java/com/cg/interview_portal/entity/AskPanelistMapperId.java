@@ -9,6 +9,9 @@ public class AskPanelistMapperId implements Serializable {
 	
 	private int panelist;
 
+	public AskPanelistMapperId() {
+	}
+	
 	public AskPanelistMapperId(int ask, int panelist) {
 		super();
 		this.ask = ask;

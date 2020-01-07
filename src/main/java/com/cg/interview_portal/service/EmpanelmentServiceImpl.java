@@ -46,8 +46,10 @@ public class EmpanelmentServiceImpl implements EmpanelmentService {
 
 	@Override
 	public boolean uploadPanelists(List<Panelist> panelists) {
-		for (Panelist panelist: panelists)
-			panelRepository.save(panelist);
+		for (Panelist panelist: panelists) {
+			ENTITY_MANAGER.merge(panelist);
+			panelRepository.flush();
+		}
 		return true;
 	}
 
