@@ -1,0 +1,50 @@
+<form #loginForm="ngForm">
+
+    <table class="table table-hover table-striped center">
+        <tbody>
+            <tr>
+                <td>
+                    <span class="input-label">Email ID: </span>
+                </td>
+                <td>
+                    <input class="form-control" type="email" name="email_input" id="email_input"
+                        [(ngModel)]="login.emailId" required pattern="[\w]+@[a-z]+.[a-z]{2,4}" #email="ngModel">
+                    <span *ngIf="email.invalid && (email.dirty || email.touched)" class="alert alert-danger">
+
+                        <span *ngIf="email.errors.required">
+                            Field can't be blank.
+                        </span>
+                        <span *ngIf="email.errors.pattern">
+                            Enter a valid email.
+                        </span>
+
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="input-label">Password: </span>
+                <td>
+                    <input class="form-control" type="password" name="pwd_input" id="pwd_input"
+                        [(ngModel)]="login.password" required minlength="6" #pwd="ngModel">
+                    <span *ngIf="pwd.invalid && (pwd.dirty || pwd.touched)" class="alert alert-danger">
+
+                        <span *ngIf="pwd.errors.required">
+                            Field can't be blank.
+                        </span>
+                        <span *ngIf="pwd.errors.minlength">
+                            Min six characters.
+                        </span>
+
+                    </span>
+                </td>
+            </tr>
+            <tr class="submit-row">
+                <td colspan="2">
+                    <button type="submit" class="btn btn-success" [disabled]="!loginForm.valid"
+                        (click)="loginUser()">Submit</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</form>
