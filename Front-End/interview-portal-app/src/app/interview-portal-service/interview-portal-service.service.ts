@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Login } from '../model/login';
+import { Login } from '../model/login.model';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { User } from '../model/user';
+import { User } from '../model/user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +22,7 @@ export class InterviewPortalService {
   }
 
   signUpUser(newUser: User): Observable<string> {
-    return null;
+    return this.connection.post<string>(this.SIGN_UP_URL, newUser, {responseType: 'text' as 'json'});
   }
 
   getUserDetails(token: string): Observable<User> {
@@ -34,8 +34,6 @@ export class InterviewPortalService {
     return this.connection.get<User>(this.GET_USER_URL, options);
   }
 
-
-
   setJWToken(token: string): void {
     sessionStorage.setItem('token', token);
   }
@@ -45,8 +43,6 @@ export class InterviewPortalService {
   }
 
   setCurrentUser(user: User): void {
-    console.log(user);
-    
     this.currentUser = user;
   }
 

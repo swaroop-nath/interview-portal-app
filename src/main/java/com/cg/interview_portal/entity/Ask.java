@@ -6,6 +6,7 @@ import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -29,17 +30,11 @@ public class Ask {
 	@OneToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
 	private Skill skill;
 	
-	@Column(length = 2, nullable = false)
-	private int slotsL1;
-	
-	@Column(length = 2, nullable = false)
-	private int slotsL2;
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	private Set<Interview> interviewDetails;
 	
 	@Column(nullable = false)
 	private LocalDate interviewDate;
-	
-	@Column(length = 50, nullable = false)
-	private String numGradePersonnel;
 	
 	@JsonManagedReference
 	@OneToMany(mappedBy = "ask")
@@ -48,15 +43,13 @@ public class Ask {
 	public Ask() {
 	}
 
-	public Ask(int askId, Skill skill, int slotsL1, int slotsL2, LocalDate interviewDate, String numGradePersonnel,
+	public Ask(int askId, Skill skill, Set<Interview> interviewDetails, LocalDate interviewDate,
 			Set<AskPanelistMapper> mapper) {
 		super();
 		this.askId = askId;
 		this.skill = skill;
-		this.slotsL1 = slotsL1;
-		this.slotsL2 = slotsL2;
+		this.interviewDetails = interviewDetails;
 		this.interviewDate = interviewDate;
-		this.numGradePersonnel = numGradePersonnel;
 		this.mapper = mapper;
 	}
 
@@ -76,22 +69,6 @@ public class Ask {
 		this.skill = skill;
 	}
 
-	public int getSlotsL1() {
-		return slotsL1;
-	}
-
-	public void setSlotsL1(int slotsL1) {
-		this.slotsL1 = slotsL1;
-	}
-
-	public int getSlotsL2() {
-		return slotsL2;
-	}
-
-	public void setSlotsL2(int slotsL2) {
-		this.slotsL2 = slotsL2;
-	}
-
 	public LocalDate getInterviewDate() {
 		return interviewDate;
 	}
@@ -99,13 +76,13 @@ public class Ask {
 	public void setInterviewDate(LocalDate interviewDate) {
 		this.interviewDate = interviewDate;
 	}
-
-	public String getNumGradePersonnel() {
-		return numGradePersonnel;
+	
+	public Set<Interview> getInterviewDetails() {
+		return interviewDetails;
 	}
 
-	public void setNumGradePersonnel(String numGradePersonnel) {
-		this.numGradePersonnel = numGradePersonnel;
+	public void setInterviewDetails(Set<Interview> interviewDetails) {
+		this.interviewDetails = interviewDetails;
 	}
 
 	public Set<AskPanelistMapper> getMapper() {

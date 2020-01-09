@@ -1,0 +1,373 @@
+<div>
+    <h4>Please choose a type of input:</h4>
+
+    <select name="input_choice" [(ngModel)]="inputChoice">
+        <option value="0">Skill and Slot</option>
+        <option value="1">Skill, Location and Slot</option>
+    </select>
+
+    <form #formOne="ngForm" [hidden]="!(inputChoice==0)">
+
+        <table class="table table-borderless first-step">
+            <thead>
+                <th colspan="2">
+                    <span class="input-label">Skill </span>
+                </th>
+                <th>
+                    <span class="input-label">L1 Slots</span>
+                </th>
+                <th>
+                    <span class="input-label">L2 Slots</span>
+                </th>
+            </thead>
+            <tbody>
+                <tr>
+                    <td colspan="2">
+                        <input class="form-control" type="text" name="skill_input" [(ngModel)]="ask.skill.skillName"
+                            required pattern="[A-Za-z]{2,}" #skill="ngModel">
+                        <span *ngIf="skill.invalid && (skill.dirty || skill.touched)" class="alert alert-danger">
+
+                            <span *ngIf="skill.errors.required">
+                                Field can't be blank.
+                            </span>
+                            <span *ngIf="skill.errors.pattern">
+                                Enter valid characters (min 2 characters)
+                            </span>
+                        </span>
+                    </td>
+                    <td>
+                        <input class="form-control" type="text" name="l1_input"
+                            [(ngModel)]="singleInterviewDetail.slotsL1" required pattern="[0-9]{1,3}" #l1="ngModel">
+                        <span *ngIf="l1.invalid && (l1.dirty || l1.touched)" class="alert alert-danger">
+
+                            <span *ngIf="l1.errors.required">
+                                Field can't be blank.
+                            </span>
+                            <span *ngIf="l1.errors.pattern">
+                                Enter valid digits (min 1 and max 3).
+                            </span>
+                        </span>
+                    </td>
+                    <td>
+                        <input class="form-control" type="text" name="l2_input"
+                            [(ngModel)]="singleInterviewDetail.slotsL2" required pattern="[0-9]{1,3}" #l2="ngModel">
+                        <span *ngIf="l2.invalid && (l2.dirty || l2.touched)" class="alert alert-danger">
+
+                            <span *ngIf="l2.errors.required">
+                                Field can't be blank.
+                            </span>
+                            <span *ngIf="l2.errors.pattern">
+                                Enter valid digits (min 1 and max 3).
+                            </span>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3">
+                        <button type="submit" class="btn btn-success" [disabled]="!formOne.valid"
+                            (click)="showNextForOne()">Next</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </form>
+
+    <form #formTwo="ngForm" [hidden]="!(inputChoice==1)">
+        <table class="table table-striped table-bordered">
+            <thead>
+                <th colspan="2">
+                    <span class="input-label">Skill</span>
+                </th>
+                <th *ngFor="let interviewDetail of interviewDetails" colspan="2">
+                    <input class="form-control" type="text" name="interview_location"
+                        [(ngModel)]="interviewDetail.interviewLocation" placeholder="Interview Location">
+                </th>
+            </thead>
+            <thead>
+                <th></th>
+                <th></th>
+                <th>
+                    <span class="input-label">Slots L1</span>
+                </th>
+                <th>
+                    <span class="input-label">Slots L2</span>
+                </th>
+                <th>
+                    <span class="input-label">Slots L1</span>
+                </th>
+                <th>
+                    <span class="input-label">Slots L2</span>
+                </th>
+                <th>
+                    <span class="input-label">Slots L1</span>
+                </th>
+                <th>
+                    <span class="input-label">Slots L2</span>
+                </th>
+            </thead>
+            <tbody>
+                <tr>
+                    <td colspan="2">
+                        <input class="form-control" type="text" name="skill_input" [(ngModel)]="ask.skill.skillName"
+                            required pattern="[A-Za-z]{2,}" #skill="ngModel">
+                        <span *ngIf="skill.invalid && (skill.dirty || skill.touched)" class="alert alert-danger">
+
+                            <span *ngIf="skill.errors.required">
+                                Field can't be blank.
+                            </span>
+                            <span *ngIf="skill.errors.pattern">
+                                Enter valid characters (min 2 characters)
+                            </span>
+                        </span>
+                    </td>
+                    <td>
+                        <input class="form-control" type="text" name="l1_input"
+                            [(ngModel)]="interviewDetails[0].slotsL1" required pattern="[0-9]{1,3}" #l1="ngModel">
+                        <span *ngIf="l1.invalid && (l1.dirty || l1.touched)" class="alert alert-danger">
+
+                            <span *ngIf="l1.errors.required">
+                                Field can't be blank.
+                            </span>
+                            <span *ngIf="l1.errors.pattern">
+                                Enter valid digits (min 1 and max 3).
+                            </span>
+                        </span>
+                    </td>
+                    <td>
+                        <input class="form-control" type="text" name="l2_input"
+                            [(ngModel)]="interviewDetails[0].slotsL2" required pattern="[0-9]{1,3}" #l2="ngModel">
+                        <span *ngIf="l2.invalid && (l2.dirty || l2.touched)" class="alert alert-danger">
+
+                            <span *ngIf="l2.errors.required">
+                                Field can't be blank.
+                            </span>
+                            <span *ngIf="l2.errors.pattern">
+                                Enter valid digits (min 1 and max 3).
+                            </span>
+                        </span>
+                    </td>
+
+                    <td>
+                        <input class="form-control" type="text" name="l1_input"
+                            [(ngModel)]="interviewDetails[1].slotsL1" required pattern="[0-9]{1,3}" #l1="ngModel">
+                        <span *ngIf="l1.invalid && (l1.dirty || l1.touched)" class="alert alert-danger">
+
+                            <span *ngIf="l1.errors.required">
+                                Field can't be blank.
+                            </span>
+                            <span *ngIf="l1.errors.pattern">
+                                Enter valid digits (min 1 and max 3).
+                            </span>
+                        </span>
+                    </td>
+                    <td>
+                        <input class="form-control" type="text" name="l2_input"
+                            [(ngModel)]="interviewDetails[1].slotsL2" required pattern="[0-9]{1,3}" #l2="ngModel">
+                        <span *ngIf="l2.invalid && (l2.dirty || l2.touched)" class="alert alert-danger">
+
+                            <span *ngIf="l2.errors.required">
+                                Field can't be blank.
+                            </span>
+                            <span *ngIf="l2.errors.pattern">
+                                Enter valid digits (min 1 and max 3).
+                            </span>
+                        </span>
+                    </td>
+
+                    <td>
+                        <input class="form-control" type="text" name="l1_input"
+                            [(ngModel)]="interviewDetails[2].slotsL1" required pattern="[0-9]{1,3}" #l1="ngModel">
+                        <span *ngIf="l1.invalid && (l1.dirty || l1.touched)" class="alert alert-danger">
+
+                            <span *ngIf="l1.errors.required">
+                                Field can't be blank.
+                            </span>
+                            <span *ngIf="l1.errors.pattern">
+                                Enter valid digits (min 1 and max 3).
+                            </span>
+                        </span>
+                    </td>
+                    <td>
+                        <input class="form-control" type="text" name="l2_input"
+                            [(ngModel)]="interviewDetails[2].slotsL2" required pattern="[0-9]{1,3}" #l2="ngModel">
+                        <span *ngIf="l2.invalid && (l2.dirty || l2.touched)" class="alert alert-danger">
+
+                            <span *ngIf="l2.errors.required">
+                                Field can't be blank.
+                            </span>
+                            <span *ngIf="l2.errors.pattern">
+                                Enter valid digits (min 1 and max 3).
+                            </span>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="8">
+                        <button type="submit" class="btn btn-success" [disabled]="!formTwo.valid"
+                            (click)="showNextForTwo()">Next</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </form>
+
+    <form #formThree="ngForm" [hidden]="!showFurtherStep">
+        <table class="table table-borderless table-striped">
+            <thead>
+                <th>
+                    <span class="input-label">Interview Location</span>
+                </th>
+                <th colspan="3">
+                    <span class="input-label">L1 Interview Slots</span>
+                </th>
+                <th colspan="3">
+                    <span class="input-label">L2 Interview Slots</span>
+                </th>
+            </thead>
+            <tr *ngFor="let interviewDetail of ask.interviewDetails">
+                <td>
+                    <h4>{{interviewDetail.interviewLocation}}</h4>
+                </td>
+                <td>
+                    <table class="table table-bordered">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <select name="grade_input" [(ngModel)]="interviewDetail.gradeOneL1">
+                                        <option *ngFor="let grade of possibleGrades" value="grade">{{ grade }}</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <input type="text" name="grade_req_input"
+                                        [(ngModel)]="interviewDetail.gradeOneSlotsL1" required pattern="[0-9]{1,3}"
+                                        #g1l1="ngModel">
+                                    <span *ngIf="g1l1.invalid && (g1l1.dirty || g1l1.touched)"
+                                        class="alert alert-danger">
+
+                                        <span *ngIf="g1l1.errors.required">
+                                            Field can't be blank.
+                                        </span>
+                                        <span *ngIf="g1l1.errors.pattern">
+                                            Enter valid digits (min 1 and max 3).
+                                        </span>
+                                    </span>
+                                </td>
+
+                                <td>
+                                    <select name="grade_input" [(ngModel)]="interviewDetail.gradeTwoL1">
+                                        <option *ngFor="let grade of possibleGrades" value="grade">{{ grade }}</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <input type="text" name="grade_req_input"
+                                        [(ngModel)]="interviewDetail.gradeTwoSlotsL1" required pattern="[0-9]{1,3}"
+                                        #g2l1="ngModel">
+                                    <span *ngIf="g2l1.invalid && (g2l1.dirty || g2l1.touched)"
+                                        class="alert alert-danger">
+
+                                        <span *ngIf="g2l1.errors.required">
+                                            Field can't be blank.
+                                        </span>
+                                        <span *ngIf="g2l1.errors.pattern">
+                                            Enter valid digits (min 1 and max 3).
+                                        </span>
+                                    </span>
+                                </td>
+
+                                <td>
+                                    <select name="grade_input" [(ngModel)]="interviewDetail.gradeThreeL1">
+                                        <option *ngFor="let grade of possibleGrades" value="grade">{{ grade }}</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <input type="text" name="grade_req_input"
+                                        [(ngModel)]="interviewDetail.gradeThreeSlotsL1" required pattern="[0-9]{1,3}"
+                                        #g3l1="ngModel">
+                                    <span *ngIf="g3l1.invalid && (g3l1.dirty || g3l1.touched)"
+                                        class="alert alert-danger">
+
+                                        <span *ngIf="g3l1.errors.required">
+                                            Field can't be blank.
+                                        </span>
+                                        <span *ngIf="g3l1.errors.pattern">
+                                            Enter valid digits (min 1 and max 3).
+                                        </span>
+                                    </span>
+                                </td>
+
+                                <td>
+                                    <select name="grade_input" [(ngModel)]="interviewDetail.gradeOneL2">
+                                        <option *ngFor="let grade of possibleGrades" value="grade">{{ grade }}</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <input type="text" name="grade_req_input"
+                                        [(ngModel)]="interviewDetail.gradeOneSlotsL2" required pattern="[0-9]{1,3}"
+                                        #g1l2="ngModel">
+                                    <span *ngIf="g1l2.invalid && (g1l2.dirty || g1l2.touched)"
+                                        class="alert alert-danger">
+
+                                        <span *ngIf="g1l2.errors.required">
+                                            Field can't be blank.
+                                        </span>
+                                        <span *ngIf="g1l2.errors.pattern">
+                                            Enter valid digits (min 1 and max 3).
+                                        </span>
+                                    </span>
+                                </td>
+
+                                <td>
+                                    <select name="grade_input" [(ngModel)]="interviewDetail.gradeTwoL2">
+                                        <option *ngFor="let grade of possibleGrades" value="grade">{{ grade }}</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <input type="text" name="grade_req_input"
+                                        [(ngModel)]="interviewDetail.gradeTwoSlotsL2" required pattern="[0-9]{1,3}"
+                                        #g2l2="ngModel">
+                                    <span *ngIf="g2l2.invalid && (g2l2.dirty || g2l2.touched)"
+                                        class="alert alert-danger">
+
+                                        <span *ngIf="g2l2.errors.required">
+                                            Field can't be blank.
+                                        </span>
+                                        <span *ngIf="g2l2.errors.pattern">
+                                            Enter valid digits (min 1 and max 3).
+                                        </span>
+                                    </span>
+                                </td>
+
+                                <td>
+                                    <select name="grade_input" [(ngModel)]="interviewDetail.gradeThreeL2">
+                                        <option *ngFor="let grade of possibleGrades" value="grade">{{ grade }}</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <input type="text" name="grade_req_input"
+                                        [(ngModel)]="interviewDetail.gradeThreeSlotsL2" required pattern="[0-9]{1,3}"
+                                        #g3l2="ngModel">
+                                    <span *ngIf="g3l2.invalid && (g3l2.dirty || g3l2.touched)"
+                                        class="alert alert-danger">
+
+                                        <span *ngIf="g3l2.errors.required">
+                                            Field can't be blank.
+                                        </span>
+                                        <span *ngIf="g3l2.errors.pattern">
+                                            Enter valid digits (min 1 and max 3).
+                                        </span>
+                                    </span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <button type="submit" class="btn btn-success" [disabled]="!formThree.valid"
+                            (click)="raiseAskRequest()">Raise Request</button>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>

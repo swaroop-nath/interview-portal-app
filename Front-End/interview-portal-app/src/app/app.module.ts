@@ -6,11 +6,15 @@ import { AuthComponent } from './auth/auth.component';
 import { NavigatorRoutingModule } from './navigator/navigator-routing.module';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { AskComponent } from './recruiter/ask/ask.component';
+import { ViewAskComponent } from './empaneller/view-ask/view-ask.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    AuthComponent
+    AuthComponent,
+    AskComponent,
+    ViewAskComponent
   ],
   imports: [
     BrowserModule,
