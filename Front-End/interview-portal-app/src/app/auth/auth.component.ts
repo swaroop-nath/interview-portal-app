@@ -32,7 +32,8 @@ export class AuthComponent implements OnInit {
       this.service.setJWToken(jwToken);
       this.service.getUserDetails(jwToken).subscribe(user => {
         this.service.setCurrentUser(user);
-        if (user.roles[0] == Role.ROLE_EMPANELLER)
+        
+        if (user.roles[0] == Role.ROLE_RECRUITER)
           this.router.navigate(['/recruiter-ask'])
         else
           this.router.navigate(['/empaneller-view-ask'])
@@ -49,7 +50,8 @@ export class AuthComponent implements OnInit {
       this.service.setJWToken(jwToken);
       this.service.getUserDetails(jwToken).subscribe(user => {
         this.service.setCurrentUser(user);
-        if (user.roles[0] == Role.ROLE_EMPANELLER)
+        
+        if (user.roles[0] == Role.ROLE_RECRUITER)
           this.router.navigate(['/recruiter-ask'])
         else
           this.router.navigate(['/empaneller-view-ask'])

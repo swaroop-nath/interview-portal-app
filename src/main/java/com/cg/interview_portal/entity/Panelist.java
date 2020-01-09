@@ -14,6 +14,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
@@ -46,7 +47,7 @@ public class Panelist {
 	@OneToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
 	private List<Skill> skills;
 
-	@JsonBackReference
+	@JsonIgnore
 	@OneToMany(mappedBy = "panelist")
 	private Set<AskPanelistMapper> mapper;
 

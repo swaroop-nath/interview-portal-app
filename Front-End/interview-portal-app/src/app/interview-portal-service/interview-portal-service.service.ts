@@ -3,6 +3,7 @@ import { Login } from '../model/login.model';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { User } from '../model/user.model';
+import { Ask } from '../model/ask.model';
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +13,7 @@ export class InterviewPortalService {
   private LOGIN_URL = "http://localhost:8180/auth-api/authenticate";
   private SIGN_UP_URL = "http://localhost:8180/auth-api/sign-up";
   private GET_USER_URL = "http://localhost:8180/auth-api/get-user";
+  private RAISE_ASK_URL = "http://localhost:8180/recruit-api/raise-ask";
 
   private currentUser: User = null;
 
@@ -32,6 +34,15 @@ export class InterviewPortalService {
       }
     }
     return this.connection.get<User>(this.GET_USER_URL, options);
+  }
+
+  raiseAsk(token: string, ask: Ask): Observable<boolean> {
+    let options = {
+      headers: {
+        'Authorization': token
+      }
+    }
+    return this.connection.post<boolean>(this.RAISE_ASK_URL, ask, options);
   }
 
   setJWToken(token: string): void {

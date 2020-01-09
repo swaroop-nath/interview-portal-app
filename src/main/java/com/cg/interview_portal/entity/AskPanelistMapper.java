@@ -17,6 +17,7 @@ import javax.persistence.TemporalType;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
@@ -24,13 +25,12 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 public class AskPanelistMapper {
 
 	@Id
-	@JsonBackReference
+	@JsonIgnore
 	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "ask_id", referencedColumnName = "ask_id")
 	private Ask ask;
 	
 	@Id
-	@JsonManagedReference
 	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "panelist_id", referencedColumnName = "panelist_id")
 	private Panelist panelist;

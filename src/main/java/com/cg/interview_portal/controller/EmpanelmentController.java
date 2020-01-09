@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,6 +19,7 @@ import com.cg.interview_portal.service.EmpanelmentService;
 @RestController
 @PreAuthorize("hasRole('ROLE_EMPANELLER')")
 @RequestMapping("empanel-api")
+@CrossOrigin("http://localhost:4200")
 public class EmpanelmentController {
 	
 	@Autowired private EmpanelmentService service;

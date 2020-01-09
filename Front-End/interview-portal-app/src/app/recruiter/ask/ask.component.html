@@ -1,10 +1,13 @@
-<div>
+<div class="layout">
     <h4>Please choose a type of input:</h4>
 
-    <select name="input_choice" [(ngModel)]="inputChoice">
-        <option value="0">Skill and Slot</option>
-        <option value="1">Skill, Location and Slot</option>
-    </select>
+    <div>
+        <select class="form-control" name="input_choice" [(ngModel)]="inputChoice">
+
+            <option value="0">Skill and Slot</option>
+            <option value="1">Skill, Location and Slot</option>
+        </select>
+    </div>
 
     <form #formOne="ngForm" [hidden]="!(inputChoice==0)">
 
@@ -24,7 +27,7 @@
                 <tr>
                     <td colspan="2">
                         <input class="form-control" type="text" name="skill_input" [(ngModel)]="ask.skill.skillName"
-                            required pattern="[A-Za-z]{2,}" #skill="ngModel">
+                            required pattern="[A-Za-z.]{2,}" #skill="ngModel">
                         <span *ngIf="skill.invalid && (skill.dirty || skill.touched)" class="alert alert-danger">
 
                             <span *ngIf="skill.errors.required">
@@ -36,7 +39,7 @@
                         </span>
                     </td>
                     <td>
-                        <input class="form-control" type="text" name="l1_input"
+                        <input class="form-control" type="number" name="l1_input"
                             [(ngModel)]="singleInterviewDetail.slotsL1" required pattern="[0-9]{1,3}" #l1="ngModel">
                         <span *ngIf="l1.invalid && (l1.dirty || l1.touched)" class="alert alert-danger">
 
@@ -49,7 +52,7 @@
                         </span>
                     </td>
                     <td>
-                        <input class="form-control" type="text" name="l2_input"
+                        <input class="form-control" type="number" name="l2_input"
                             [(ngModel)]="singleInterviewDetail.slotsL2" required pattern="[0-9]{1,3}" #l2="ngModel">
                         <span *ngIf="l2.invalid && (l2.dirty || l2.touched)" class="alert alert-danger">
 
@@ -63,7 +66,10 @@
                     </td>
                 </tr>
                 <tr>
-                    <td colspan="3">
+                    <td colspan="2">
+                        <input class="form-control" type="date" name="date_input" [(ngModel)]="ask.interviewDate" required>
+                    </td>
+                    <td colspan="2">
                         <button type="submit" class="btn btn-success" [disabled]="!formOne.valid"
                             (click)="showNextForOne()">Next</button>
                     </td>
@@ -109,7 +115,7 @@
                 <tr>
                     <td colspan="2">
                         <input class="form-control" type="text" name="skill_input" [(ngModel)]="ask.skill.skillName"
-                            required pattern="[A-Za-z]{2,}" #skill="ngModel">
+                            required pattern="[A-Za-z.]{2,}" #skill="ngModel">
                         <span *ngIf="skill.invalid && (skill.dirty || skill.touched)" class="alert alert-danger">
 
                             <span *ngIf="skill.errors.required">
@@ -121,7 +127,7 @@
                         </span>
                     </td>
                     <td>
-                        <input class="form-control" type="text" name="l1_input"
+                        <input class="form-control" type="number" name="l1_input"
                             [(ngModel)]="interviewDetails[0].slotsL1" required pattern="[0-9]{1,3}" #l1="ngModel">
                         <span *ngIf="l1.invalid && (l1.dirty || l1.touched)" class="alert alert-danger">
 
@@ -134,7 +140,7 @@
                         </span>
                     </td>
                     <td>
-                        <input class="form-control" type="text" name="l2_input"
+                        <input class="form-control" type="number" name="l2_input"
                             [(ngModel)]="interviewDetails[0].slotsL2" required pattern="[0-9]{1,3}" #l2="ngModel">
                         <span *ngIf="l2.invalid && (l2.dirty || l2.touched)" class="alert alert-danger">
 
@@ -148,7 +154,7 @@
                     </td>
 
                     <td>
-                        <input class="form-control" type="text" name="l1_input"
+                        <input class="form-control" type="number" name="l1_input"
                             [(ngModel)]="interviewDetails[1].slotsL1" required pattern="[0-9]{1,3}" #l1="ngModel">
                         <span *ngIf="l1.invalid && (l1.dirty || l1.touched)" class="alert alert-danger">
 
@@ -161,7 +167,7 @@
                         </span>
                     </td>
                     <td>
-                        <input class="form-control" type="text" name="l2_input"
+                        <input class="form-control" type="number" name="l2_input"
                             [(ngModel)]="interviewDetails[1].slotsL2" required pattern="[0-9]{1,3}" #l2="ngModel">
                         <span *ngIf="l2.invalid && (l2.dirty || l2.touched)" class="alert alert-danger">
 
@@ -175,7 +181,7 @@
                     </td>
 
                     <td>
-                        <input class="form-control" type="text" name="l1_input"
+                        <input class="form-control" type="number" name="l1_input"
                             [(ngModel)]="interviewDetails[2].slotsL1" required pattern="[0-9]{1,3}" #l1="ngModel">
                         <span *ngIf="l1.invalid && (l1.dirty || l1.touched)" class="alert alert-danger">
 
@@ -188,7 +194,7 @@
                         </span>
                     </td>
                     <td>
-                        <input class="form-control" type="text" name="l2_input"
+                        <input class="form-control" type="number" name="l2_input"
                             [(ngModel)]="interviewDetails[2].slotsL2" required pattern="[0-9]{1,3}" #l2="ngModel">
                         <span *ngIf="l2.invalid && (l2.dirty || l2.touched)" class="alert alert-danger">
 
@@ -202,7 +208,10 @@
                     </td>
                 </tr>
                 <tr>
-                    <td colspan="8">
+                    <td colspan="2">
+                        <input class="form-control" type="date" name="date_input" [(ngModel)]="ask.interviewDate" required>
+                    </td>
+                    <td colspan="6">
                         <button type="submit" class="btn btn-success" [disabled]="!formTwo.valid"
                             (click)="showNextForTwo()">Next</button>
                     </td>
@@ -217,28 +226,30 @@
                 <th>
                     <span class="input-label">Interview Location</span>
                 </th>
-                <th colspan="3">
-                    <span class="input-label">L1 Interview Slots</span>
-                </th>
-                <th colspan="3">
-                    <span class="input-label">L2 Interview Slots</span>
-                </th>
+                
             </thead>
             <tr *ngFor="let interviewDetail of ask.interviewDetails">
                 <td>
                     <h4>{{interviewDetail.interviewLocation}}</h4>
                 </td>
                 <td>
-                    <table class="table table-bordered">
+                    <table class="table table-striped">
                         <tbody>
+                            <thead>
+                                <th></th>
+                                <th>
+                                    <span class="input-label">L1 Interview Slots</span>
+                                </th>
+                                <th></th>
+                            </thead>
                             <tr>
                                 <td>
-                                    <select name="grade_input" [(ngModel)]="interviewDetail.gradeOneL1">
-                                        <option *ngFor="let grade of possibleGrades" value="grade">{{ grade }}</option>
+                                    <select class="form-control" name="grade_input" [(ngModel)]="interviewDetail.gradeOneL1">
+                                        <option *ngFor="let grade of possibleGrades">{{ grade }}</option>
                                     </select>
                                 </td>
                                 <td>
-                                    <input type="text" name="grade_req_input"
+                                    <input class="form-control" type="number" name="grade_req_input"
                                         [(ngModel)]="interviewDetail.gradeOneSlotsL1" required pattern="[0-9]{1,3}"
                                         #g1l1="ngModel">
                                     <span *ngIf="g1l1.invalid && (g1l1.dirty || g1l1.touched)"
@@ -254,12 +265,12 @@
                                 </td>
 
                                 <td>
-                                    <select name="grade_input" [(ngModel)]="interviewDetail.gradeTwoL1">
-                                        <option *ngFor="let grade of possibleGrades" value="grade">{{ grade }}</option>
+                                    <select class="form-control" name="grade_input" [(ngModel)]="interviewDetail.gradeTwoL1">
+                                        <option *ngFor="let grade of possibleGrades">{{ grade }}</option>
                                     </select>
                                 </td>
                                 <td>
-                                    <input type="text" name="grade_req_input"
+                                    <input class="form-control" type="number" name="grade_req_input"
                                         [(ngModel)]="interviewDetail.gradeTwoSlotsL1" required pattern="[0-9]{1,3}"
                                         #g2l1="ngModel">
                                     <span *ngIf="g2l1.invalid && (g2l1.dirty || g2l1.touched)"
@@ -275,12 +286,12 @@
                                 </td>
 
                                 <td>
-                                    <select name="grade_input" [(ngModel)]="interviewDetail.gradeThreeL1">
-                                        <option *ngFor="let grade of possibleGrades" value="grade">{{ grade }}</option>
+                                    <select class="form-control" name="grade_input" [(ngModel)]="interviewDetail.gradeThreeL1">
+                                        <option *ngFor="let grade of possibleGrades">{{ grade }}</option>
                                     </select>
                                 </td>
                                 <td>
-                                    <input type="text" name="grade_req_input"
+                                    <input class="form-control" type="number" name="grade_req_input"
                                         [(ngModel)]="interviewDetail.gradeThreeSlotsL1" required pattern="[0-9]{1,3}"
                                         #g3l1="ngModel">
                                     <span *ngIf="g3l1.invalid && (g3l1.dirty || g3l1.touched)"
@@ -294,14 +305,22 @@
                                         </span>
                                     </span>
                                 </td>
-
+                            </tr>
+                            <thead>
+                                <th></th>
+                                <th>
+                                    <span class="input-label">L2 Interview Slots</span>
+                                </th>
+                                <th></th>
+                            </thead>
+                            <tr>
                                 <td>
-                                    <select name="grade_input" [(ngModel)]="interviewDetail.gradeOneL2">
-                                        <option *ngFor="let grade of possibleGrades" value="grade">{{ grade }}</option>
+                                    <select class="form-control" name="grade_input" [(ngModel)]="interviewDetail.gradeOneL2">
+                                        <option *ngFor="let grade of possibleGrades">{{ grade }}</option>
                                     </select>
                                 </td>
                                 <td>
-                                    <input type="text" name="grade_req_input"
+                                    <input class="form-control" type="number" name="grade_req_input"
                                         [(ngModel)]="interviewDetail.gradeOneSlotsL2" required pattern="[0-9]{1,3}"
                                         #g1l2="ngModel">
                                     <span *ngIf="g1l2.invalid && (g1l2.dirty || g1l2.touched)"
@@ -317,12 +336,12 @@
                                 </td>
 
                                 <td>
-                                    <select name="grade_input" [(ngModel)]="interviewDetail.gradeTwoL2">
-                                        <option *ngFor="let grade of possibleGrades" value="grade">{{ grade }}</option>
+                                    <select class="form-control" name="grade_input" [(ngModel)]="interviewDetail.gradeTwoL2">
+                                        <option *ngFor="let grade of possibleGrades">{{ grade }}</option>
                                     </select>
                                 </td>
                                 <td>
-                                    <input type="text" name="grade_req_input"
+                                    <input class="form-control" type="number" name="grade_req_input"
                                         [(ngModel)]="interviewDetail.gradeTwoSlotsL2" required pattern="[0-9]{1,3}"
                                         #g2l2="ngModel">
                                     <span *ngIf="g2l2.invalid && (g2l2.dirty || g2l2.touched)"
@@ -338,12 +357,12 @@
                                 </td>
 
                                 <td>
-                                    <select name="grade_input" [(ngModel)]="interviewDetail.gradeThreeL2">
-                                        <option *ngFor="let grade of possibleGrades" value="grade">{{ grade }}</option>
+                                    <select class="form-control" name="grade_input" [(ngModel)]="interviewDetail.gradeThreeL2">
+                                        <option *ngFor="let grade of possibleGrades">{{ grade }}</option>
                                     </select>
                                 </td>
                                 <td>
-                                    <input type="text" name="grade_req_input"
+                                    <input class="form-control" type="number" name="grade_req_input"
                                         [(ngModel)]="interviewDetail.gradeThreeSlotsL2" required pattern="[0-9]{1,3}"
                                         #g3l2="ngModel">
                                     <span *ngIf="g3l2.invalid && (g3l2.dirty || g3l2.touched)"
@@ -365,7 +384,7 @@
             <tr>
                 <td colspan="2">
                     <button type="submit" class="btn btn-success" [disabled]="!formThree.valid"
-                            (click)="raiseAskRequest()">Raise Request</button>
+                        (click)="raiseAskRequest()">Raise Request</button>
                 </td>
             </tr>
         </table>

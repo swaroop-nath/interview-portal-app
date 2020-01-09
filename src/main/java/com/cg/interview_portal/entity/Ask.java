@@ -36,7 +36,6 @@ public class Ask {
 	@Column(nullable = false)
 	private LocalDate interviewDate;
 	
-	@JsonManagedReference
 	@OneToMany(mappedBy = "ask")
 	private Set<AskPanelistMapper> mapper;
 

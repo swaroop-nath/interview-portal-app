@@ -36,6 +36,7 @@ public class AuthServiceImpl implements AuthService {
 			authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(credentials.getEmailId(), credentials.getPassword()));
 			return jwTokenProvider.createToken(credentials.getEmailId(), repository.findUserByEmailID(credentials.getEmailId()).getRoles());
 		} catch (AuthenticationException e) {
+			System.out.println(e.getMessage());
 			throw new InvalidCredentialsException("Invalid Login Credentials.", HttpStatus.BAD_REQUEST);
 		}
 	}
@@ -74,7 +75,6 @@ public class AuthServiceImpl implements AuthService {
 			throw new SessionTimedOutException("Session Timed Out. Please Login Again", HttpStatus.BAD_REQUEST);
 		String userEmailId = jwTokenProvider.getUsername(authorizationToken);
 		User loggedInUser = repository.findUserByEmailID(userEmailId);
-		loggedInUser.setPassword("CLASSIFIED");
 		return loggedInUser;
 	}
 

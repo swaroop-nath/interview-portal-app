@@ -7,11 +7,11 @@ import { ViewAskComponent } from '../empaneller/view-ask/view-ask.component';
 const routes: Routes = [
   {
     path: '', 
-    component: AskComponent
+    component: AuthComponent
   },
   {
     path: 'recruiter-ask',
-    component: AuthComponent
+    component: AskComponent
   },
   {
     path: 'empaneller-view-ask',

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Ask } from 'src/app/model/ask.model';
 import { Interview } from 'src/app/model/interview.model';
+import { InterviewPortalService } from 'src/app/interview-portal-service/interview-portal-service.service';
 
 @Component({
   selector: 'app-ask',
@@ -20,11 +21,15 @@ export class AskComponent implements OnInit {
 
   possibleGrades: string[];
 
-  constructor() { 
+  constructor(private service: InterviewPortalService) { 
+    this.initPage();
+  }
+
+  initPage() {
     this.ask = new Ask();
     this.interviewDetails = [new Interview(), new Interview(), new Interview()];
     this.singleInterviewDetail = new Interview();
-    this.possibleGrades = ['B1', 'B2', 'C1', 'C2', 'D1', 'D2', 'E1', 'E2']
+    this.possibleGrades = ['B1', 'B2', 'C1', 'C2', 'D1', 'D2', 'E1', 'E2'];
   }
 
   ngOnInit() {
@@ -46,6 +51,20 @@ export class AskComponent implements OnInit {
   raiseAskRequest(): void {
     console.log(this.ask);
     
+    this.ask.interviewDetails.forEach(detail => {
+      if (detail.slotsL1 != (detail.gradeOneSlotsL1 + detail.gradeTwoSlotsL1 + detail.gradeThreeSlotsL1)) {
+        alert('Please input a valid combination of slots.')
+        return
+      }
+      if (detail.slotsL2 != (detail.gradeOneSlotsL2 + detail.gradeTwoSlotsL2 + detail.gradeThreeSlotsL2)) {
+        alert('Please input a valid combination of slots.')
+        return
+      }
+    });
+    this.service.raiseAsk(this.service.getJWToken(), this.ask).subscribe(val => {
+      alert('Uploaded Successfully');
+      this.initPage();
+    });
   }
 
 }

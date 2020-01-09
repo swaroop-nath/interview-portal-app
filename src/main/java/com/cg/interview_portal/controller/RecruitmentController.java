@@ -2,6 +2,7 @@ package com.cg.interview_portal.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,6 +14,7 @@ import com.cg.interview_portal.service.RecruitmentService;
 @RestController
 @PreAuthorize("hasRole('ROLE_RECRUITER')")
 @RequestMapping("recruit-api")
+@CrossOrigin("http://localhost:4200")
 public class RecruitmentController {
 	
 	@Autowired private RecruitmentService service;
