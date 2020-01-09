@@ -1,1 +1,30 @@
-<p>view-ask works!</p>
+<div class="layout">
+    <table class="table table-borderless">
+        <tbody>
+            <tr>
+                <td colspan="3">
+                    <input type="date" name="date_input" [(ngModel)]="dateQuery">
+                </td>
+                <td>
+                    <button type="submit" class="btn btn-success"
+                            (click)="searchAsks()">Find</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <table class="table table-borderless">
+        <thead>
+            <th>Skill</th>
+            <th>Interview Location(s)</th>
+            <th>Interview Date</th>
+        </thead>
+        <tbody>
+            <tr *ngFor="let ask of askView; let i=index">
+                <td>{{ask.skill.skillName}}</td>
+                <td>{{locations[i]}}</td>
+                <td>{{ask.interviewDate}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

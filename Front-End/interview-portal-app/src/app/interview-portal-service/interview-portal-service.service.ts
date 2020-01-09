@@ -14,8 +14,11 @@ export class InterviewPortalService {
   private SIGN_UP_URL = "http://localhost:8180/auth-api/sign-up";
   private GET_USER_URL = "http://localhost:8180/auth-api/get-user";
   private RAISE_ASK_URL = "http://localhost:8180/recruit-api/raise-ask";
+  private FETCH_ASK_URL = "http://localhost:8180/empanel-api/fetch-asks";
 
   private currentUser: User = null;
+
+  loadedAsks: Ask[] = [];
 
   constructor(private connection: HttpClient) { }
 
@@ -43,6 +46,15 @@ export class InterviewPortalService {
       }
     }
     return this.connection.post<boolean>(this.RAISE_ASK_URL, ask, options);
+  }
+
+  loadAsks(token: string): Observable<Ask[]> {
+    let options = {
+      headers: {
+        'Authorization': token
+      }
+    }
+    return this.connection.get<Ask[]>(this.FETCH_ASK_URL, options)
   }
 
   setJWToken(token: string): void {
